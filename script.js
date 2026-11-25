@@ -5,8 +5,8 @@
 'use strict';
 
 const CONFIG = {
-  password: 'Ayush',            // not case-sensitive
-  name: 'OG Ayush',                // name on the red ribbon
+  password: 'Firoz',            // not case-sensitive
+  name: 'Khadoos!',                // name on the red ribbon
   placeholder: 'assets/images/placeholder.svg',
   memories: [                     // swap these for your own photos or GIFs
     { src: 'assets/images/train.jpg', caption: 'train rides' },
