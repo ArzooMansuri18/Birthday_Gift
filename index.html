@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#e8532b" />
+  <title>A Birthday Surprise</title>
+
+  <!-- Free Google Fonts (optional: see assets/fonts/README.txt to self-host) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Baloo+2:wght@600;800&family=Great+Vibes&family=Mali:wght@400;600&family=Pinyon+Script&family=Playfair+Display:wght@600;700&family=Rye&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Shared SVG defs: clip shapes + tiny icons -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="clipTL" clipPathUnits="objectBoundingBox">
+        <path d="M0,0 H1 V0.16 C0.82,0.15 0.62,0.15 0.45,0.21 C0.27,0.27 0.15,0.37 0.11,0.55 C0.09,0.66 0.09,0.82 0.09,1 H0 Z" />
+      </clipPath>
+      <clipPath id="clipTR" clipPathUnits="objectBoundingBox">
+        <path d="M0,0 H1 V1 C0.78,0.96 0.55,0.84 0.4,0.62 C0.27,0.43 0.14,0.2 0,0 Z" />
+      </clipPath>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.6A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="currentColor"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 0c.8 6.5 3.5 9.2 12 12-8.5 2.8-11.2 5.5-12 12-.8-6.5-3.5-9.2-12-12C8.5 9.2 11.2 6.5 12 0z" fill="currentColor"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="9" fill="#f7c63a" stroke="#c9961a" stroke-width="1.5"/><path d="M3.4 13.2h17.2" stroke="#c9961a" stroke-width="1.6"/><circle cx="12" cy="16.6" r="1.7" fill="#8a5a00"/><ellipse cx="8.6" cy="7.6" rx="2.4" ry="1.4" fill="#fff" opacity=".55" transform="rotate(-35 8.6 7.6)"/></symbol>
+      <symbol id="i-dora" viewBox="0 0 24 24"><ellipse cx="12" cy="8.5" rx="9.5" ry="5" fill="#cf8d4a"/><rect x="2.5" y="9" width="19" height="5" fill="#f6dfa5"/><ellipse cx="12" cy="15" rx="9.5" ry="5" fill="#c4813f"/></symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24"><path d="M8 3l9 9-9 9" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M16 3l-9 9 9 9" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Shared decorative frame (red gingham corners on blue gingham) -->
+  <div id="frame" class="frame" data-theme="soft" aria-hidden="true">
+    <div class="corner corner--tl"></div>
+    <svg class="corner-line corner-line--tl" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M100,19.5 C82,18.5 62,18.5 45,25 C28,31 17,41 13,58 C11,68 11,84 11,100" /></svg>
+    <div class="corner corner--tr"></div>
+  </div>
+
+  <main id="app">
+
+    <!-- 1. HOMEPAGE / PASSWORD -->
+    <section class="screen screen--lock is-active" id="screen-lock" data-frame="hidden">
+      <div class="home">
+        <div class="collage" aria-hidden="true">
+          <figure class="sticker sticker--1"><img data-photo="assets/images/poster.jpg" alt="" /></figure>
+          <figure class="sticker sticker--2"><img data-photo="assets/images/baby-bed.jpg" alt="" /></figure>
+          <figure class="sticker sticker--3"><img data-photo="assets/images/dorayaki.jpg" alt="" /></figure>
+          <figure class="sticker sticker--4"><img data-photo="assets/images/moon.jpg" alt="" /></figure>
+          <svg class="collage__bell collage__bell--1"><use href="#i-bell"/></svg>
+          <svg class="collage__bell collage__bell--2"><use href="#i-bell"/></svg>
+        </div>
+        <form class="lock" id="lockForm" autocomplete="off" novalidate>
+          <h1 class="lock__title">A surprise is waiting<br>for you</h1>
+          <label for="pw" class="lock__label">Enter the password to view</label>
+          <input id="pw" class="lock__input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="pwMsg" />
+          <button type="button" id="captcha" class="captcha" role="checkbox" aria-checked="false">
+            <span class="captcha__box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#1b9a55" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="captcha__text">I'm not a robot</span>
+            <span class="captcha__spin" aria-hidden="true"></span>
+          </button>
+          <p id="pwMsg" class="lock__msg" role="alert"></p>
+          <button type="submit" class="lock__btn">Continue</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2-4. MASCOT QUESTIONS (ask / angry / excited share this screen) -->
+    <section class="screen screen--mascot" id="screen-mascot" data-frame="soft">
+      <div class="scene">
+        <svg class="arc" viewBox="0 0 800 280" aria-live="polite">
+          <path id="arcAsk" d="M30,255 Q400,-35 770,205" fill="none" />
+          <text><textPath id="arcAskText" href="#arcAsk" startOffset="2%"></textPath></text>
+        </svg>
+        <div class="mascot-wrap" id="mascotMain"></div>
+        <p class="scene__sub" id="mascotSub"></p>
+        <div class="choices" id="choices"></div>
+      </div>
+    </section>
+
+    <!-- 5. GIFTS -->
+    <section class="screen screen--gifts" id="screen-gifts" data-frame="solid">
+      <div class="scene">
+        <svg class="arc arc--gifts" viewBox="0 0 800 220">
+          <path id="arcGifts" d="M20,200 Q400,-30 780,150" fill="none" />
+          <text><textPath href="#arcGifts" startOffset="2%">Each gift has something for you..</textPath></text>
+        </svg>
+        <div class="gifts" id="gifts"></div>
+        <div class="gifts__hint">
+          <div class="mascot-wrap mascot-wrap--small" id="mascotHint"></div>
+          <p class="chunk" id="giftHint"></p>
+        </div>
+      </div>
+      <button class="nav nav--next" id="giftsNext" aria-label="Continue"><svg><use href="#i-chev"/></svg></button>
+    </section>
+
+    <!-- 6. HAPPY BIRTHDAY -->
+    <section class="screen screen--birthday" id="screen-birthday" data-frame="soft">
+      <div class="bday">
+        <div class="bday__text">
+          <span class="bday__happy">HAPPY <svg class="spark"><use href="#i-star"/></svg></span>
+          <h2 class="bday__script">Birthday</h2>
+          <p class="bday__note">Happy birthday! Wishing you a life full of happiness, love, laughter, and joy every day, always.</p>
+          <div class="ribbon"><span id="bdayName">Chikuuu</span></div>
+        </div>
+        <figure class="photo-card">
+          <span class="clip"></span>
+          <img data-photo="assets/images/selfie.jpg" alt="Birthday photo" />
+        </figure>
+        <svg class="bday__stars" viewBox="0 0 60 60" aria-hidden="true"><use href="#i-star" x="0" y="14" width="30" height="30"/><use href="#i-star" x="26" y="2" width="16" height="16"/><use href="#i-star" x="30" y="34" width="12" height="12"/></svg>
+      </div>
+      <button class="nav nav--back" data-goto="gifts" aria-label="Back to gifts"><svg><use href="#i-back"/></svg></button>
+      <button class="nav nav--next" data-goto="gifts" aria-label="Back to gifts"><svg><use href="#i-chev"/></svg></button>
+    </section>
+
+    <!-- 7. MAKE A WISH -->
+    <section class="screen screen--wish" id="screen-wish" data-frame="soft">
+      <div class="wish">
+        <h2 class="chunk wish__title">MAKE A WISH</h2>
+        <div class="cake-area">
+          <button class="cake" id="cake" aria-label="Blow out the candles"></button>
+          <button class="candy" id="candy" aria-label="Click me to blow the candles"><span>CLICK<br>ME</span></button>
+        </div>
+        <p class="wish__msg" id="wishMsg">Close your eyes, think of a wish, then blow the candles.</p>
+      </div>
+      <button class="nav nav--back" data-goto="gifts" aria-label="Back to gifts"><svg><use href="#i-back"/></svg></button>
+      <button class="nav nav--next" data-goto="gifts" aria-label="Back to gifts"><svg><use href="#i-chev"/></svg></button>
+    </section>
+
+    <!-- 8. MEMORIES -->
+    <section class="screen screen--memories" id="screen-memories" data-frame="small">
+      <div class="memories">
+        <h2 class="ransom" aria-label="Memories">
+          <span class="rl rl--1">M</span><span class="rl rl--2">E</span><span class="rl rl--3">m</span><span class="rl rl--4">o</span><span class="rl rl--5">r</span><span class="rl rl--6">i</span><span class="rl rl--7">E</span><span class="rl rl--8">S</span>
+        </h2>
+        <div class="strings" id="strings"></div>
+        <p class="memories__hint">tap a photo</p>
+      </div>
+      <button class="nav nav--back" data-goto="gifts" aria-label="Back to gifts"><svg><use href="#i-back"/></svg></button>
+      <button class="nav nav--next" data-goto="letter" aria-label="Next: letter"><svg><use href="#i-chev"/></svg></button>
+    </section>
+
+    <!-- 9. LETTER -->
+    <section class="screen screen--letter" id="screen-letter" data-frame="hidden">
+      <div class="letter">
+        <div class="letter__lace" aria-hidden="true"></div>
+        <div class="letter__scroll" id="letterScroll">
+          <h2 class="letter__title"><span>My fav person</span><i class="dot"></i></h2>
+          <p class="letter__dear">Dear bestie,</p>
+          <div class="letter__body">
+            <p>Happy Birthday, Bestie! <svg class="ico ico--heart"><use href="#i-heart"/></svg></p>
+            <p>Honestly, I don't know how to put into words how grateful I am to have you in my life. Thank you for being my biggest supporter, my partner in crime, and the person I can always count on. Through all the laughs, random conversations, inside jokes, and even the tough days, you've made life so much better just by being a part of it.</p>
+            <p>I hope this year brings you everything you've been wishing for&mdash;happiness, success, peace, good health, and countless reasons to smile. Never forget how amazing, kind, and loved you are. You deserve nothing but the very best.</p>
+            <p>No matter where life takes us, I hope we always stay this close and keep making memories together. Thank you for being the wonderful person you are and for making my life brighter every single day. Have the happiest birthday, and enjoy every moment of your special day! I love you so much.</p>
+          </div>
+          <p class="letter__sign">Love you <svg class="ico ico--heart"><use href="#i-heart"/></svg></p>
+        </div>
+      </div>
+      <button class="nav nav--back" data-goto="memories" aria-label="Back"><svg><use href="#i-back"/></svg></button>
+      <button class="nav nav--next" data-goto="gifts" aria-label="Back to gifts"><svg><use href="#i-chev"/></svg></button>
+    </section>
+
+    <!-- 10. FINAL MESSAGE -->
+    <section class="screen screen--final" id="screen-final" data-frame="soft">
+      <div class="scene">
+        <h2 class="final__text chunk">May all the good things you've been waiting for finally find you this year <svg class="ico ico--heart"><use href="#i-heart"/></svg></h2>
+        <figure class="final__card pop" id="finalCard"><img data-photo="assets/images/dream-big.jpg" alt="" /></figure>
+        <div class="final__buttons">
+          <button class="pill" id="replayBtn">Watch again</button>
+          <button class="pill pill--ghost" id="lockBtn">Lock it</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Memory lightbox -->
+  <div class="lightbox" id="lightbox" hidden>
+    <figure class="polaroid polaroid--big"><div class="polaroid__img"><img alt="" /></div><figcaption></figcaption></figure>
+  </div>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <button id="musicBtn" class="music" hidden aria-label="Toggle music" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="2.6" fill="currentColor"/><circle cx="17" cy="16" r="2.6" fill="currentColor"/></svg></button>
+  <audio id="bgm" loop preload="none" src="assets/music/birthday.mp3"></audio>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

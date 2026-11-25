@@ -1,0 +1,1 @@
+Fonts load from Google Fonts. To self-host: download Baloo 2, Great Vibes, Pinyon Script, Playfair Display, Mali, Abril Fatface, Rye, Special Elite from fonts.google.com, put the files here and add @font-face rules to style.css.
