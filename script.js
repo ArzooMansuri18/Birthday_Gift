@@ -5,8 +5,8 @@
 'use strict';
 
 const CONFIG = {
-   password: 'Ayush',            // not case-sensitive
-   name: 'OG Ayush',                // name on the red ribbon
+  password: 'Ayush',            // not case-sensitive
+  name: 'OG Ayush',                // name on the red ribbon
   placeholder: 'assets/images/placeholder.svg',
   memories: [                     // swap these for your own photos or GIFs
     { src: 'assets/images/train.jpg', caption: 'train rides' },
@@ -194,12 +194,18 @@ mascotMain.innerHTML = mascotCard('ask', MASCOT_IMG.ask);
 $$('img[data-src]', mascotMain).forEach(i => setPhoto(i, i.dataset.src));
 
 const SCENES = {
-  ask:     { text: 'I have made something for you', sub: 'Do you wanna see it?', mood: 'happy',
-             choices: [{ label: 'YES', go: 'excited', r: '-4deg' }, { label: 'NO', go: 'angry', r: '5deg' }] },
-  angry:   { text: 'HOW DARE YOU!?', sub: '', mood: 'angry',
-             choices: [{ label: 'TRY AGAIN', go: 'ask', cls: 'choice--try' }] },
-  excited: { text: 'Are you really excited?', sub: '', mood: 'excited',
-             choices: [{ label: 'YES', go: 'gifts', r: '-4deg' }, { label: 'YES', go: 'gifts', r: '4deg' }] }
+  ask: {
+    text: 'I have made something for you', sub: 'Do you wanna see it?', mood: 'happy',
+    choices: [{ label: 'YES', go: 'excited', r: '-4deg' }, { label: 'NO', go: 'angry', r: '5deg' }]
+  },
+  angry: {
+    text: 'HOW DARE YOU!?', sub: '', mood: 'angry',
+    choices: [{ label: 'TRY AGAIN', go: 'ask', cls: 'choice--try' }]
+  },
+  excited: {
+    text: 'Are you really excited?', sub: '', mood: 'excited',
+    choices: [{ label: 'YES', go: 'gifts', r: '-4deg' }, { label: 'YES', go: 'gifts', r: '4deg' }]
+  }
 };
 
 async function playScene(key) {
@@ -370,12 +376,12 @@ bgm.addEventListener('error', () => { musicOK = false; musicBtn.hidden = true; }
 function startMusic() {
   if (!musicOK) return;
   bgm.volume = .6;
-  bgm.play().then(() => { musicBtn.hidden = false; musicBtn.setAttribute('aria-pressed', 'true'); }).catch(() => {});
+  bgm.play().then(() => { musicBtn.hidden = false; musicBtn.setAttribute('aria-pressed', 'true'); }).catch(() => { });
 }
 function stopMusic() { bgm.pause(); bgm.currentTime = 0; musicBtn.hidden = true; }
 musicBtn.addEventListener('click', () => {
   const on = musicBtn.getAttribute('aria-pressed') === 'true';
-  on ? bgm.pause() : bgm.play().catch(() => {});
+  on ? bgm.pause() : bgm.play().catch(() => { });
   musicBtn.setAttribute('aria-pressed', String(!on));
 });
 
