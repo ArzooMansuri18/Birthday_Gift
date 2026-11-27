@@ -55,7 +55,7 @@
         <form class="lock" id="lockForm" autocomplete="off" novalidate>
           <h1 class="lock__title">A surprise is waiting<br>for you</h1>
           <label for="pw" class="lock__label">Enter the password to view</label>
-          <input id="pw" class="lock__input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="pwMsg" />
+          <input id="pw" class="lock__input" type="text" placeholder="Type your name" maxlength="30" autocomplete="off" autocapitalize="words" spellcheck="false" aria-describedby="pwMsg" />
           <button type="button" id="captcha" class="captcha" role="checkbox" aria-checked="false">
             <span class="captcha__box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#1b9a55" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <span class="captcha__text">I'm not a robot</span>
@@ -103,7 +103,7 @@
           <span class="bday__happy">HAPPY <svg class="spark"><use href="#i-star"/></svg></span>
           <h2 class="bday__script">Birthday</h2>
           <p class="bday__note">Happy birthday! Wishing you a life full of happiness, love, laughter, and joy every day, always.</p>
-          <div class="ribbon"><span id="bdayName">Chikuuu</span></div>
+          <div class="ribbon"><span id="bdayName" class="js-name"></span></div>
         </div>
         <figure class="photo-card">
           <span class="clip"></span>
@@ -148,11 +148,11 @@
         <div class="letter__lace" aria-hidden="true"></div>
         <div class="letter__scroll" id="letterScroll">
           <h2 class="letter__title"><span>My fav person</span><i class="dot"></i></h2>
-          <p class="letter__dear">Dear Khadoos,</p>
+          <p class="letter__dear">Dear <span class="js-name">bestie</span>,</p>
           <div class="letter__body">
-            <p>Happy Birthday!!!<svg class="ico ico--heart"><use href="#i-heart"/></svg></p>
+            <p>Happy Birthday, <span class="js-name">Bestie</span>! <svg class="ico ico--heart"><use href="#i-heart"/></svg></p>
             <p>Honestly, I don't know how to put into words how grateful I am to have you in my life. Thank you for being my biggest supporter, my partner in crime, and the person I can always count on. Through all the laughs, random conversations, inside jokes, and even the tough days, you've made life so much better just by being a part of it.</p>
-            <p>I hope this year brings you everything you've been wishing for&mdash;happiness, success, peace, good health, and countless reasons to smile. Never forget how amazing, kind, and loved you are. You deserve nothing but the very best.</p>
+            <p>I hope this year brings you everything you've been wishing for&mdash;happiness, success, peace, good health, and countless reasons to smile. Never forget how amazing, kind, and loved you are, <span class="js-name">bestie</span>. You deserve nothing but the very best.</p>
             <p>No matter where life takes us, I hope we always stay this close and keep making memories together. Thank you for being the wonderful person you are and for making my life brighter every single day. Have the happiest birthday, and enjoy every moment of your special day! I love you so much.</p>
           </div>
           <p class="letter__sign">Love you <svg class="ico ico--heart"><use href="#i-heart"/></svg></p>
