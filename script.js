@@ -5,8 +5,7 @@
 'use strict';
 
 const CONFIG = {
-  password: 'Firoz',            // not case-sensitive
-  name: 'Khadoos!',                // name on the red ribbon
+  name: '',                     // filled in from whatever is typed in the password box
   placeholder: 'assets/images/placeholder.svg',
   memories: [                     // swap these for your own photos or GIFs
     { src: 'assets/images/train.jpg', caption: 'train rides' },
@@ -155,6 +154,17 @@ function setPhoto(img, src) {
 }
 $$('img[data-photo]').forEach(img => setPhoto(img, img.dataset.photo));
 
+/* ---------- dynamic name (whatever is typed as the password) ---------- */
+function titleCase(str) {
+  return str.toLowerCase().replace(/(^|[\s'-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+}
+function setName(raw) {
+  CONFIG.name = titleCase(raw);
+  $$('.js-name').forEach(el => { el.textContent = CONFIG.name; });
+  SCENES.angry.text = 'HOW DARE YOU, ' + CONFIG.name.toUpperCase() + '!?';
+  SCENES.excited.text = CONFIG.name + ', are you really excited?';
+}
+
 /* =========================================================
    1. LOCK
    ========================================================= */
@@ -173,8 +183,10 @@ captcha.addEventListener('click', async () => {
 
 lockForm.addEventListener('submit', e => {
   e.preventDefault();
-  if (pw.value.trim().toLowerCase() !== CONFIG.password.toLowerCase()) return fail('Wrong password, try again.');
+  const typed = pw.value.trim().replace(/\s+/g, ' ');
+  if (!typed) return fail('Please type the password first.');
   if (!robotOK) return fail('Please confirm you are not a robot.');
+  setName(typed);
   pwMsg.textContent = '';
   startMusic();
   startMascotFlow();
@@ -183,7 +195,7 @@ lockForm.addEventListener('submit', e => {
 function fail(msg) {
   pwMsg.textContent = msg;
   lockForm.classList.remove('shake'); void lockForm.offsetWidth; lockForm.classList.add('shake');
-  if (msg.startsWith('Wrong')) { pw.select(); }
+  if (msg.startsWith('Please type')) { pw.focus(); }
 }
 
 /* =========================================================
@@ -345,6 +357,7 @@ $('#replayBtn').addEventListener('click', () => { opened.clear(); $$('.gift').fo
 $('#lockBtn').addEventListener('click', () => {
   opened.clear(); $$('.gift').forEach(g => g.classList.remove('is-opening', 'is-opened'));
   robotOK = false; captcha.setAttribute('aria-checked', 'false'); pw.value = ''; pwMsg.textContent = '';
+  CONFIG.name = '';
   stopMusic(); show('lock');
 });
 
@@ -427,5 +440,3 @@ function tick() {
   if (!raf) ctx.clearRect(0, 0, innerWidth, innerHeight);
 }
 
-/* ribbon name */
-$('#bdayName').textContent = CONFIG.name;
